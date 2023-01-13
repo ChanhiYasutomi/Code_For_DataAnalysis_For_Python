@@ -18,4 +18,3 @@ def columns_categories(data_set):
     print('object(',n,'):\n',object_columns)
     print('int(',m,'):\n',int_columns)
     print('float(',s,'):\n',float_columns)
-  
