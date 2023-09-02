@@ -17,5 +17,5 @@ dataframe = dataframe['Id'].dropna().drop_duplicates()
 dataframe['flag_4'] = 1
 df_customer = pd.merge(df_customer, dataframe, how = 'left', on='Id')
 
-# フラグ(1)がある行であればその顧客を対象にフィルタリング … ②
+# 一つでもフラグ(1)があればその顧客を対象にする … ②
 df_customer = df_customer[(df_customer['flag_1'] == 1) | (df_customer['flag_2'] == 1) | (df_customer['flag_3'] == 1) | (df_customer['flag_4'] == 1)]
