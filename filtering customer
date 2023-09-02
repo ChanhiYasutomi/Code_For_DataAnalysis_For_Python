@@ -9,7 +9,7 @@ df_customer_tmp = pd.merge(df_customer_tmp, dataframe_1, how = 'left',left_on='I
 df_customer_tmp = pd.merge(df_customer_tmp, dataframe_2, how = 'left',left_on='Id', right_on='Id_tmp')
 df_customer_tmp = pd.merge(df_customer_tmp, dataframe_3, how = 'left',left_on='Id', right_on='Id_tmp')
 
-# df_customerに対して上記にてフィルタリングしてdf_customer_tmpをleft joinすることで対象から顧客をフィルタリング
+# df_customerに対して上記にてフィルタリングしたdf_customer_tmpをleft join
 df_customer = pd.merge(df_customer, df_customer_tmp, how = 'left', on='Id')
 
 # … ①の処理
