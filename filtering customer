@@ -4,7 +4,7 @@ df_customer_tmp = df_customer['Id'].drop_duplicates()
 
 # df_customer_tmpに対してdataframe_1~3をleft joinする
 # dataframe_1~3はユニーク処理(drop_duplicates())かつnullを除外しており(dropna())、またフラグを付与している。そのフラグが付与されているレコードだけ抽出したい(フラグには1を付与) … ①
-# この処理の目的はdf_customer_tmpに対して、dataframe_1~3にあるidがある顧客を対象にすることが目的である。 … ②
+# この処理の目的はdf_customer_tmpに対して、dataframe_1~3にidがある顧客を対象にすることが目的である。 … ②
 df_customer_tmp = pd.merge(df_customer_tmp, dataframe_1, how = 'left',left_on='Id', right_on='Id_tmp')
 df_customer_tmp = pd.merge(df_customer_tmp, dataframe_2, how = 'left',left_on='Id', right_on='Id_tmp')
 df_customer_tmp = pd.merge(df_customer_tmp, dataframe_3, how = 'left',left_on='Id', right_on='Id_tmp')
