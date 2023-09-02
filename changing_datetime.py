@@ -5,9 +5,9 @@ dataframe['columns_timestamp'] = pd.to_datetime(dataframe['columns_timestamp']) 
 dataframe['date'] = dataframe['columns_timestamp'].apply(lambda x: x.date())
 
 # example below
-pd.Timedelta(hours=9)は、PythonのPandasライブラリを使用して作成される時間の差を表すオブジェクトです。具体的には、このコードは「9時間」を表現しています。
-PandasのTimedeltaオブジェクトは、時間の差や経過時間を表現するために使用されます。Timedeltaオブジェクトは、日数、時間、分、秒、ミリ秒、マイクロ秒、ナノ秒などの単位で時間の差を表すことができます。
-例えば、pd.Timedelta(hours=9)は、9時間の時間差を表します。このオブジェクトを使うことで、時間を加算、減算、またはデータフレームの列に時間を追加するなどの操作が可能になります。
+# pd.Timedelta(hours=9)は、PythonのPandasライブラリを使用して作成される時間の差を表すオブジェクトです。具体的には、このコードは「9時間」を表現しています。
+# PandasのTimedeltaオブジェクトは、時間の差や経過時間を表現するために使用されます。Timedeltaオブジェクトは、日数、時間、分、秒、ミリ秒、マイクロ秒、ナノ秒などの単位で時間の差を表すことができます。
+# 例えば、pd.Timedelta(hours=9)は、9時間の時間差を表します。このオブジェクトを使うことで、時間を加算、減算、またはデータフレームの列に時間を追加するなどの操作が可能になります。
 
 以下はいくつかの例です：
 import pandas as pd
