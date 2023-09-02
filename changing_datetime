@@ -1,2 +1,5 @@
 # Timestamp__c 列を datetime 型に変換(JST変換)
-pd.to_datetime(dataframe['columns']) + pd.Timedelta(hours=9)
+dataframe['columns'] = pd.to_datetime(dataframe['columns']) + pd.Timedelta(hours=9)
+
+#日付抽出
+dataframe['date'] = dataframe['columns'].apply(lambda x: x.date())
