@@ -1,11 +1,13 @@
 # (※要注意)
-# 以下をId(ユニーク)と属性で分けている理由としてdataframe.groupby([['Id','attribute_1', 'attribute_2', 'attribute_3','attribute_n']])[columns].sum().reset_index()のようにgroubyをしたら、nullの部分がまとめてグループ化されるため母数が減少するため。
+# 以下をId(ユニーク)と属性で分けている理由としてdataframe.groupby([['Id','attribute_1', 'attribute_2', 'attribute_3','attribute_n']])[columns].sum().reset_index()のようにgroubyをしたら、nullの部分が弾かれてグループ化され、母数が減少するため。
 # そのためIdと属性を分割し、後にinner joinしている。
+# 代替案として引数に dropna = Trueを設定すればいいかもしれないが確実かつ安全な処理では以下のようにした方がいい。
 columns = ['2023-01', '2023-02', '2023-03', '2023-04', '2023-05', '2023-06', '2023-07', '2023-08', '2023-09', '2023-10', '2023-11', '2023-12']
 only_id = dataframe.groupby(['Id'])[columns].sum().reset_index()　# nullがないことが前提(あるいは処理済み)
 attribute = dataframe[['Id','attribute_1', 'attribute_2', 'attribute_3','attribute_n']].drop_duplicates()
 
 dataframe = pd.merge(only_id, attribute, how = 'inner',left_on='Id',right_on='Id') # inner joinした理由はユニークであり、欠損がなかったから(確かnull処理はしていない。)
+
 
 # Group by null どうなる？
 # GROUP BY 節にリストした列において、NULL 値を含む各行は単一グループに属します。 つまり、すべての NULL 値がまとめてグループ化されます。
