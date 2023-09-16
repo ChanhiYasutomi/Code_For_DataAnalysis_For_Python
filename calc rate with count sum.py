@@ -1,3 +1,4 @@
+# フラグであることが前提 -> 'second_flg'
 import pandas as pd
 
 # 提供されたデータ
