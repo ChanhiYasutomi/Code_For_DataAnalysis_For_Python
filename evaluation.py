@@ -48,6 +48,24 @@ plt.xlabel('Predicted Labels')  # x軸のラベルを設定する
 plt.ylabel('True Labels')  # y軸のラベルを設定する
 plt.show()  # ヒートマップを表示する
 
+# y: 目的変数
+# pred: 予測値(0,1 の反転なし)
+
+# 正解率 (Accuracy)
+accuracy = accuracy_score(y, pred)
+print("Accuracy:", accuracy*100)
+
+# 再現率 (Recall)
+recall = recall_score(y, pred)
+print("Recall:", recall*100)
+
+# 適合率 (Precision)
+precision = precision_score(y, pred)
+print("Precision:", precision*100)
+
+# F1値 (F1)
+f1 = f1_score(y, pred)
+print("F1:", f1*100)
 
 # このPythonコードは、保存されたLightGBMモデルを読み込み、新しいデータに対して予測を行い、混同行列（Confusion Matrix）とROC曲線のAUCスコアを計算して可視化する方法を示しています。以下は、コードの詳細な説明です。
 # best_model_on_LGBM = pickle.load(open("./data/F2_dataset_add_features_model_on_optuna_20230824.pkl", 'rb'))：保存されたLightGBMモデルをバイナリ読み込みモードで開き、best_model_on_LGBM変数に読み込みます。このモデルは前のステップでトレーニングされたものです。
