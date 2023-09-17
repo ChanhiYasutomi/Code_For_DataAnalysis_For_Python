@@ -3,6 +3,7 @@
 import shap
 
 # 文字化けしている場合は英語に変える
+X_en = X.columns
 
 # Explain predictions
 print("step1...")
