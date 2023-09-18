@@ -98,3 +98,65 @@ df['age_group'] = pd.cut(df['age'],
 # pd.cut 関数を使用して、'age' カラムを指定した区間に分割します。bins パラメータには年齢の区間を指定し、labels パラメータには各区間に対応するラベルを指定しています。これにより、各行の年齢が対応する区間に分類されます。
 # 結果として得られる区間に対応するラベルが、新しい 'age_group' カラムに割り当てられます。各行の 'age' に応じて、対応する 'age_group' ラベルが格納されます。
 # このようにして、DataFrame 内の年齢データを区間ごとに分類し、新しい 'age_group' カラムを作成します。この 'age_group' カラムを使用することで、年齢に基づいた集計や可視化などの操作が簡単に行えるようになります。
+
+
+
+# priceを区間に分けて、新しいカラムprice_groupを作成する
+df['sales_group'] = pd.cut(df['sales'], 
+                            bins=range(1, 20001, 2000), 
+                            labels=['{}-{}'.format(i, i+1999) for i in range(1, 18001, 2000)])
+
+# salesが16001以上の場合、sales_groupを"16001-18000"に設定する
+df.loc[df['sales'] >= 16001, 'sales_group'] = '16001-18000'
+
+
+
+# priceを区間に分けて、新しいカラムprice_groupを作成する
+df['unit_price'] = pd.cut(df['price'], 
+                            bins=range(1, 8001, 500), 
+                            labels=['{}-{}'.format(i, i+499) for i in range(1, 7501, 500)])
+
+# 下限の上書き
+df.loc[df['price'] <= 2000, 'unit_price'] = '1501-2000'
+
+# 上限の上書き
+df.loc[df['price'] >= 7001, 'unit_price'] = '7001-7500'
+
+print(df['unit_price'].isnull().sum())
+
+no5 = df.groupby(['producttype','unit_price'])['target'].agg(["count","sum"])
+
+# 不要な下限を削除するために一度ばらす
+no5 = no5.reset_index()
+no5 = no5[~no5['unit_price'].isin(['1-500', '501-1000', '1001-1500'])]
+# 再度マルチインデックスにまとめる
+no5 = no5.set_index(['producttype', 'unit_price'])
+
+
+
+# 30 ずつ
+# 上限 181-210　→　1 ~ 211　→　プラス 30 → 1 ~ 241
+df['daysofsupply'] = pd.cut(df['use_days'], 
+                            bins=range(1, 241, 30), 
+                            labels=['{}-{}'.format(i, i+29) for i in range(1, 211, 30)])
+
+
+
+# 150 ずつ
+# 上限 2100-2250　→　1 ~ 2251　→　プラス 150 → 1 ~ 2401
+df['coupon_discount_group'] = pd.cut(df['coupon_discount'], 
+                            bins=range(1, 2401, 150), 
+                            labels=['{}-{}'.format(i, i+149) for i in range(1, 2251, 150)])
+
+# 下限の上書き
+df.loc[df['coupon_discount'] <= 150, 'coupon_discount_group'] = '1-150'
+
+# 上限の上書き
+df.loc[df['coupon_discount'] >=2101, 'coupon_discount_group'] = '2101-2250'
+
+# ★集計上の注意点
+# 1 ~ 150 には 0 も含まれるようにしたので、エクセルでは 0 - 150 に上書きする
+# Categorical 型の値を上書きするのは面倒なのでコードは修正しない
+
+
+
