@@ -160,3 +160,26 @@ df.loc[df['coupon_discount'] >=2101, 'coupon_discount_group'] = '2101-2250'
 
 
 
+# パラメータ
+columname = '予測確率'
+start = 0
+bin = 0.05
+max = df[columname].max()
+
+# bins の生成
+bins = list(np.arange(start, max + bin, bin))
+
+# ラベルの生成
+labels = [f'{i:.2f}以上{i+bin:.2f}未満' for i in bins[:-1]]
+labels[-1] = f'{bins[-2]:.2f}以上{bins[-1]:.2f}以下'  # 最後のラベルだけ別途設定
+
+# ビン化とラベル付け
+df[columname+'_bins'] = pd.cut(df[columname], bins=bins, labels=labels, include_lowest=True)
+
+# このコードは、特定の列の値をビン化し、各ビンにラベルを付ける例です。以下はコードの詳細な説明です。
+# columname、start、bin、maxのパラメータを設定します。これらのパラメータは、ビン化する対象の列名、ビンの開始値、ビンの幅、および最大値を表します。
+# binsの生成: np.arangeを使用して、startからmaxまでの範囲でビンの境界値（bin edges）を生成します。ビンの幅はbinで指定された値です。生成されたビンの境界値はリストとしてbinsに格納されます。
+# ラベルの生成: 各ビンに対するラベルを生成します。ビンの境界値をもとにして、各ビンに対するラベルを作成します。labelsリストにラベルを格納します。最後のビンのラベルは別途設定されており、それがlabels[-1]に格納されます。
+# ビン化とラベル付け: pd.cut関数を使用して、対象の列（df[columname]）を指定したビンに分割します。binsパラメータにはビンの境界値が、labelsパラメータにはビンのラベルが指定されます。include_lowest=Trueは、最小値を含むことを意味します。この処理により、指定した列の各値が対応するビンに分類され、ラベルが付けられます。その結果、新しい列columname+'_bins'がDataFrameに追加されます。
+
+# このコードを使用することで、指定した列の値をビン化し、各ビンに対するラベルを簡単に付けることができます。これは、データのグループ化やビンごとの集計など、さまざまなデータ処理タスクで役立ちます。
