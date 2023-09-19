@@ -6,7 +6,7 @@ for key, value in model.res.best_params_.items():
 import json
 
 d = model.res.best_params_
-now = filename.replace('./data/F2_dataset_add_features_model_', '').replace('.pkl', '')
+now = filename.replace('xxx', '').replace('.pkl', '')
 path = f"./data/best_params_{now}.json"
 
 with open(path, 'w') as f:
@@ -18,7 +18,7 @@ with open(path, 'w') as f:
 
 # ハイパーパラメータの印刷後、ベストパラメータをJSONファイルに保存します。
 # d = model.res.best_params_  # ベストパラメータを取得
-# now = filename.replace('./data/F2_dataset_add_features_model_', '').replace('.pkl', '')  # ファイル名から日付部分を抽出
+# now = filename.replace('xxx', '').replace('.pkl', '')  # ファイル名から日付部分を抽出
 # path = f"./data/best_params_{now}.json"  # ファイルの保存パスを生成
 
 # with open(path, 'w') as f:
