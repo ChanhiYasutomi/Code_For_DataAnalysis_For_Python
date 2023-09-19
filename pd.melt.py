@@ -15,3 +15,12 @@ df = pd.DataFrame(data)
 # value_name='Value'：新しい値の列の名前を設定し、元々の 'M1' と 'M2' の値が 'Value' として変換されます。
 
 melted_df = pd.melt(df, id_vars=['ID'], value_vars=['M1', 'M2'], var_name='Metric', value_name='Value')
+
+
+
+# 特定のカラムを縦持ちにして新しいカラムを生成
+columns = ['word_1', 'word_2', 'word_3', 'word_4', 'word_5']
+df_melted = dataframe.melt(id_vars=['Id'], value_vars=columns, value_name='dep').dropna(subset=['dep'])
+
+# 元のデータフレームと結合
+result = pd.merge(dataframe, df_melted, on='Id', how='outer')
