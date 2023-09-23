@@ -15,3 +15,34 @@ datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
 
 # このコードを実行すると、現在の日付と時刻が指定されたフォーマットで文字列として返されます。たとえば、現在の日付が2023年9月15日で時間が15時30分45秒の場合、'2023-09-15-15-30-45' といった文字列が得られます。
 # このような日付時刻の文字列は、ログファイルのファイル名やタイムスタンプなど、さまざまな用途で使用されます。
+
+
+# サンプルのデータフレームを使用して、日時データの前処理と新しい特徴量の作成が行われました。以下は、コードの実行結果です。
+import pandas as pd
+
+# サンプルのデータフレームを作成
+data = {'pickup_datetime': ['2023-10-19 08:15:00 UTC', '2023-11-03 12:30:00 UTC', '2023-09-30 18:45:00 UTC']}
+df = pd.DataFrame(data)
+
+# 'pickup_datetime' 列の日時データをPandasの日時オブジェクトに変換
+df['pickup_datetime'] = pd.to_datetime(df['pickup_datetime'], format="%Y-%m-%d %H:%M:%S UTC")
+
+# 新しい特徴量の抽出
+df['hour'] = df['pickup_datetime'].dt.hour
+df['day'] = df['pickup_datetime'].dt.day
+df['month'] = df['pickup_datetime'].dt.month
+df['dayofweek'] = df['pickup_datetime'].dt.dayofweek #dayofweekに関しては、０が月曜日、６が日曜日を表します。
+df['year'] = df['pickup_datetime'].dt.year
+
+# 結果を表示
+display(df)
+
+pickup_datetime  hour  day  month  dayofweek  year
+0 2023-10-19 08:15:00     8   19     10          3  2023
+1 2023-11-03 12:30:00    12    3     11          4  2023
+2 2023-09-30 18:45:00    18   30      9          5  2023
+
+
+# 各新しい特徴量が適切に抽出され、日時データから時間、日、月、曜日、年の情報が取得されています。
+# このような特徴量エンジニアリングは、日時データを分析や機械学習モデルのトレーニングに活用する際に役立ちます。
+# たとえば、特定の曜日や月にイベントが発生しやすいかどうかを調査したり、年ごとのトレンドを分析したりするのに役立ちます。
