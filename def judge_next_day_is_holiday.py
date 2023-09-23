@@ -1,3 +1,6 @@
+# 次の日が休日であるかを判定
+# 分析する問題によっては、当日が休日であるよりも、次の日が休日であるかが重要な場合もあります。
+
 def judge_next_day_is_holiday(dayofweek):
     return np.where((dayofweek == 4) | (dayofweek == 5), 1, 0)
 
