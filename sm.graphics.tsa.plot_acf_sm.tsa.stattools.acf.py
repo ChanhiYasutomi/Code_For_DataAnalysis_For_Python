@@ -35,6 +35,8 @@ data = {'Average Temperature (℃)': [25, 28, 30, 24, 26, 29, 31, 27, 26, 28]}
 df = pd.DataFrame(data)
 
 # 自己相関を計算
+# sm.tsa.stattools.acf(df["Average Temperature (℃)"],nlags=9)[9] #9番目の相関を出力
+# acf_result: sm.tsa.stattools.acf(df["Average Temperature (℃)"],nlags=9)と同じ
 acf_result, confint = sm.tsa.acf(df["Average Temperature (℃)"], nlags=9, fft=False, alpha=0.05)
 
 # 自己相関のプロット
