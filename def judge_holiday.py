@@ -1,3 +1,4 @@
+# 土曜、日曜のみを休日とする簡易的な休日判定です。
 # judge_holiday 関数は、与えられた曜日情報をもとに、その日が週末（土曜日または日曜日）であるかどうかを判定するための関数です。具体的な例を挙げて説明します。
 def judge_holiday(dayofweek):
     return np.where((dayofweek == 5) | (dayofweek == 6), 1, 0)
