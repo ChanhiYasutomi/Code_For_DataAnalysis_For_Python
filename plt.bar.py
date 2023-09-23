@@ -36,7 +36,7 @@ data = {'category': np.random.choice(['A', 'B', 'C', 'D', 'E'], size=1000)}
 df = pd.DataFrame(data)
 
 # 'category' 列のカテゴリごとの出現頻度を取得
-category_counts = df['category'].value_counts()[:15]
+category_counts = df['category'].value_counts()
 
 # 棒グラフを描画
 plt.bar(x=category_counts.index,  # カテゴリのラベル
