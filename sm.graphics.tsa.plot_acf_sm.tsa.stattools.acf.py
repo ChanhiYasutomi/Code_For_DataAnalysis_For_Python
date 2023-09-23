@@ -37,7 +37,7 @@ df = pd.DataFrame(data)
 # 自己相関を計算
 # sm.tsa.stattools.acf(df["Average Temperature (℃)"],nlags=9)[9] #9番目の相関を出力
 # acf_result: sm.tsa.stattools.acf(df["Average Temperature (℃)"],nlags=9)と同じ
-acf_result, confint = sm.tsa.acf(df["Average Temperature (℃)"], nlags=9, fft=False, alpha=0.05)
+acf_result, confint = sm.tsa.acf(df["Average Temperature (℃)"], nlags=9, fft=False, alpha=0.05) #これがかなり使える(大事) -> 69行目以降から出力する方法を記載
 
 # 自己相関のプロット
 plt.bar(range(10), acf_result)
