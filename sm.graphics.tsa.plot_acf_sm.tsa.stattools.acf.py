@@ -37,6 +37,8 @@ df = pd.DataFrame(data)
 # 自己相関を計算
 # sm.tsa.stattools.acf(df["Average Temperature (℃)"],nlags=9)[9] #9番目の相関を出力
 # acf_result: sm.tsa.stattools.acf(df["Average Temperature (℃)"],nlags=9)と同じ
+# acf_result(autocorrelation coefficient): 自己相関係数
+# confint(Confidence interval): 自己相関係数(acf_result)の95%信頼区間(alpha=0.05 -> これはデフォルトで0.05(95%信頼区間))
 acf_result, confint = sm.tsa.acf(df["Average Temperature (℃)"], nlags=9, fft=False, alpha=0.05) #これがかなり使える(大事) -> 69行目以降から出力する方法を記載
 
 # 自己相関のプロット
