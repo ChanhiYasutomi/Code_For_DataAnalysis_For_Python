@@ -4,7 +4,7 @@ def horizontal_arrange(df):
     df = df.join(_df)
     del _df
     df['interval'] = df['pre_recency']-df['recency']
-    df = df.drop(columns=['pre_date', 'pre_recency', 'pre_product_use_days', 'pre_cum'])
+    df = df.drop(columns=['pre_date', 'pre_recency', 'pre_use_days', 'pre_cum'])
     return df[df['cum']>=2]
 
 # 提供された関数 horizontal_arrange は、データフレーム内の行をユーザーごとに並び替えて、特定の列に対して差分や間隔を計算し、条件を満たす行のみを残すために使用されます。
