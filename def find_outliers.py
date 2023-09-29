@@ -18,6 +18,7 @@ def find_outliers(column):
     # 外れ値の割合を算出
     outliers_rate = outliers.sum() / len(column)
     return outliers, outliers_rate
+    # return outliers_rate #, outliers # こうしたら割合を算出できる。
 
 # データセットを作成
 data = {'Value': [10, 15, 20, 25, 30, 100, 105, 110, 115, 120, 600, 600]}
