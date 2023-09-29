@@ -11,6 +11,25 @@ def unique_to_binary(column):
     else:
         return 0
 
+def find_outliers(column):
+    # データの平均値と標準偏差を計算
+    mean = column.mean()
+    std = column.std()
+    
+    # 外れ値の閾値を設定
+    threshold = 2  # この値を調整して外れ値の基準を変更
+    
+    # 外れ値を検出する条件を設定
+    lower_bound = mean - threshold * std
+    upper_bound = mean + threshold * std
+    
+    # 外れ値を検出
+    outliers = (column < lower_bound) | (column > upper_bound)
+
+    # 外れ値の割合を算出
+    outliers_rate = outliers.sum() / len(column)
+    return outliers_rate #,outliers
+
 # データ検品
 data_inspection = pd.DataFrame({
     'Column Name': df.columns,
@@ -27,6 +46,7 @@ data_inspection = pd.DataFrame({
     'median': df.median(numeric_only=True),
     'mode': df.mode(numeric_only=True).iloc[0],
     'mode rate': (df.mode(numeric_only=True).iloc[0] / len(df)), #.round(5)
+    'outliers rate': find_outliers(df), #.round(5)
     'std': df.std(numeric_only=True),
     'min': df.min(numeric_only=True),
     '25 percentile': df.quantile(0.25, numeric_only=True),
