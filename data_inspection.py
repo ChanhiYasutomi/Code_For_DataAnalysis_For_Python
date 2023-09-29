@@ -11,17 +11,6 @@ def unique_to_binary(column):
     else:
         return 0
 
-#外れ値割合(プラスマイナス5σ)
-# # 各数値カラムの外れ値割合を計算
-# def outlier_percentage(column):
-#     mean = column.mean()
-#     std = column.std()
-#     lower_bound = mean - 5 * std
-#     upper_bound = mean + 5 * std
-#     outliers = (column < lower_bound) | (column > upper_bound)
-#     outlier_percentage = outliers.sum() / len(column)
-#     return outlier_percentage
-
 # データ検品
 data_inspection = pd.DataFrame({
     'Column Name': df.columns,
