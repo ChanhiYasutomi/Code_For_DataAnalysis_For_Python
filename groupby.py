@@ -84,3 +84,30 @@ print('\n')
 # NaNを持つ行もグループに含める（dropna=False）
 # dropna=Falseすることでnullで予期せずデータが落ちることはない。
 display(df.groupby('Category', dropna=False, as_index = False)["Sales"].sum())
+
+
+
+# df.groupby('Category', as_index=False) における as_index=False は、Pandasの groupby 操作において、グループ化した列をインデックスにしないオプションを指定するためのパラメータです。
+# デフォルトでは、groupby 操作を実行すると、指定した列（ここでは 'Category' 列）が新しいDataFrameのインデックスになります。つまり、グループ化した結果が新しいDataFrameの行インデックスになります。
+# この動作は、一部の状況では便利ですが、データを操作する際にはインデックスになることが望ましくない場合もあります。
+# as_index=False を指定すると、グループ化した結果のインデックスに指定した列を使用せず、0から始まる連番の整数インデックスが自動的に生成されます。つまり、グループ化されたデータが新しいDataFrameの列に含まれることになります。
+# 以下は、as_index=False を使用した例です:
+import pandas as pd
+
+data = {'Category': ['A', 'A', 'B', 'B', 'C', 'C'],
+        'Value': [10, 20, 15, 15, 30, 40]}
+
+df = pd.DataFrame(data)
+
+# 'Category' 列でグループ化し、as_index=False を指定
+result = df.groupby('Category', as_index=False).sum()
+
+print(result)
+
+# このコードは、'Category' 列でグループ化された各カテゴリーの合計値を計算し、新しいDataFrameを生成します。
+# as_index=False を指定したため、グループ化されたカテゴリーが新しいDataFrameの列として保持されています。結果は次のようになります：
+#   Category  Value
+# 0        A     30
+# 1        B     30
+# 2        C     70
+# このように、as_index=False を指定することで、グループ化結果が新しいDataFrameの列として保持され、インデックスにならないようになります。
