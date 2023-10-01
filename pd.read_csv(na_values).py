@@ -13,8 +13,8 @@
 
 # import pandas as pd
 
-# na_values = ['', 'NA', -1, 9999]
-# df = pd.read_csv('xxx.csv', na_values=na_values)
+na_values = ['', 'NA', -1, 9999]
+df = pd.read_csv('xxx.csv', na_values=na_values)
 # この場合、CSVファイル内のデータが ''、'NA'、-1、9999 に一致する場合、それらは欠損値として扱われます。結果として、df データフレームには欠損値が適切にマークされ、Pandasの欠損値処理機能を使用して後続の分析や操作を行うことができます。
 
 # na_values パラメータは、特定のデータセットにおいてどの値が欠損値として扱われるべきかをカスタマイズする際に便利です。
