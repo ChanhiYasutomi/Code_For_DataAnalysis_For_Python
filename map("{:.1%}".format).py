@@ -1,8 +1,5 @@
 # .map("{:.1%}".format) は、PandasのSeriesやDataFrameの要素をパーセンテージ形式の文字列に変換するために使用されるコードです。具体的には、要素をパーセンテージ表記に変換し、小数点以下1桁の精度で表示します。
 # 以下に、.map("{:.1%}".format) の具体例を示します：
-
-python
-Copy code
 import pandas as pd
 
 # サンプルのデータを作成
