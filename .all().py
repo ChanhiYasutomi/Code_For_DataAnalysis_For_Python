@@ -53,3 +53,28 @@ True
 False
 False
 False
+
+
+
+import pandas as pd
+
+# サンプルデータを含むデータフレームを作成
+data = {
+    'A': [True, True, False, True],
+    'B': [True, False, False, False],
+    'C': [True, True, True, True]
+}
+
+df = pd.DataFrame(data)
+
+# 各行に対して.all(1)メソッドを適用し、各行内の要素がすべてTrueであるかどうかを確認
+row_results = df.all(1)
+display(row_results)
+
+# データフレーム全体に対して.all()メソッドを適用し、すべての要素がTrueであるかどうかを確認
+record_result = df.all()
+display(record_result)
+
+# データフレーム全体に対して.all()メソッドを適用し、すべての要素がTrueであるかどうかを確認
+overall_result = df.all().all()
+display(overall_result)
