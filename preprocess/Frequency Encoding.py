@@ -1,44 +1,26 @@
-# Frequency Encoding（頻度エンコーディング）は、カテゴリカルなデータを数値データに変換するテクニックの一つです。各カテゴリの出現頻度を使用して、カテゴリを対応する数値にエンコードします。
-# これにより、カテゴリごとの情報が数値データにキャプチャされ、機械学習モデルに適した形式に変換されます。
-# 以下に、Pythonコードを使用してFrequency Encodingを説明する具体的な例を示します。
-
+# requency Encoding（頻度エンコーディング）は、カテゴリカルデータを数値データに変換する手法で、
+# 各カテゴリの出現頻度（割合）をそのカテゴリの新しい数値としてエンコードします。以下に、Pythonコードを使用してFrequency Encodingを実行する具体的な例を示します：
 import pandas as pd
 
 # サンプルデータを含むデータフレームを作成
 data = {
-    'Category': ['A', 'B', 'A', 'C', 'B', 'A', 'A', 'C', 'B', 'B']
+    'Category': ['A', 'B', 'A', 'C', 'B', 'A', 'A', 'C'],
+    'Value': [10, 20, 15, 25, 30, 10, 10, 25]
 }
 
 df = pd.DataFrame(data)
 
-# カテゴリごとの出現頻度を計算
-category_counts = df['Category'].value_counts().reset_index()
-category_counts.columns = ['Category', 'Frequency']
+# 'Category' 列をFrequency Encodingでエンコード
+frequency_encoding_dict = (df['Category'].value_counts(normalize=True)).to_dict()
+df['Category_Frequency_Encoded'] = df['Category'].map(frequency_encoding_dict)
 
-# カテゴリを頻度に置き換える
-df_encoded = df.merge(category_counts, on='Category', how='left')
-df_encoded.drop(columns=['Category'], inplace=True)
+print(df)
 
-print(df_encoded)
+# このコードの具体的なステップは以下の通りです：
+# サンプルデータを含むデータフレーム df を作成します。
+# value_counts(normalize=True) メソッドを使用して 'Category' 列内の各カテゴリの出現頻度を計算し、それを正規化（合計が1になるように）します。これにより、各カテゴリの出現頻度が割合として得られます。
+# to_dict() メソッドを使用して、出現頻度を辞書に変換します。この辞書は各カテゴリをキーとし、出現頻度の割合を値として保持します。
+# map() メソッドを使用して 'Category' 列をFrequency Encodingで置き換えます。各カテゴリはその出現頻度の割合で置き換えられます。新しい列 'Category_Frequency_Encoded' がデータフレームに追加されます。
 
-# このコードでは、次の手順を実行しています：
-# カテゴリカルなデータを持つデータフレーム df を作成します。
-# value_counts() メソッドを使用して、各カテゴリの出現頻度を計算します。それぞれのカテゴリの頻度が category_counts という新しいデータフレームに格納されます。
-# merge() メソッドを使用して、元のデータフレーム df と category_counts を 'Category' カラムをキーにして結合します。これにより、カテゴリをその出現頻度に置き換えます。
-# 最後に、'Category' カラムを削除して、Frequency Encodingが適用されたデータフレーム df_encoded を得ます。
-# 上記のコードを実行すると、以下のようなデータフレーム df_encoded が得られます：
-
-#    Frequency
-# 0          4
-# 1          4
-# 2          4
-# 3          2
-# 4          4
-# 5          4
-# 6          4
-# 7          2
-# 8          4
-# 9          4
-
-# カテゴリ 'A' は4回、カテゴリ 'B' も4回、カテゴリ 'C' は2回出現しているため、それぞれのカテゴリが対応する頻度にエンコードされました。
-# これにより、カテゴリカルな情報が数値データに変換され、機械学習モデルに適した形式になります。
+# 最終的なデータフレームは、'Category' 列がFrequency Encodingによって置き換えられ、各カテゴリの出現頻度の割合がその数値としてエンコードされた 'Category_Frequency_Encoded' 列を含んでいます。
+# このエンコードは、カテゴリカルデータの頻度情報を数値データに変換するために使用され、モデルの学習に適した形式にするのに役立ちます。
