@@ -3,10 +3,10 @@ import random
 
 def generate_product_name(length=6):
     characters = string.ascii_letters + string.digits
-    return ''.join(random.choice(characters) for _ in range(length))
+    return ''.join(random.choice(characters) for character in range(length))
 
 # 100個の商品名を生成
-product_names = [generate_product_name() for _ in range(100)]
+product_names = [generate_product_name() for character in range(100)]
 
 # 生成した商品名を表示
 for i, name in enumerate(product_names, start=1):
