@@ -1,3 +1,45 @@
+# pd.cut 関数は、連続したデータをビン（区間）に分割するために使用される Pandas の関数です。これにより、データを異なる範囲に分類してカテゴリに変換することができます。以下に具体例を示します。
+# まず、ランダムな数値からなるデータを作成し、それを pd.cut を使用してビンに分割します。
+import pandas as pd
+import numpy as np
+
+# ランダムなデータの生成
+np.random.seed(42)
+data = np.random.randint(0, 100, 20)
+
+# ビンの範囲を指定
+bins = [0, 20, 40, 60, 80, 100]
+
+# pd.cutを使用してデータをビンに分割
+category = pd.cut(data, bins)
+
+# 結果を表示
+df = pd.DataFrame({'Data': data, 'Category': category})
+print(df)
+
+# この例では、0から100の範囲で20個のランダムな整数を生成し、pd.cut を使用してビンに分割しています。指定した bins パラメータに基づいて、各データポイントは対応するビン（区間）に分類されます。結果は新しい DataFrame に格納されています。
+# ビンには左側の値は含まれ、右側の値は含まれません。例えば、20は[20, 40)の範囲に含まれますが、40は含まれません。結果として得られた DataFrame には、各データポイントがどのビンに分類されたかが表示されます。
+
+
+
+# pd.cut を使用して、データを指定したビンに分割し、各ビンにラベルを付ける例を説明します。
+# 具体例として、累積売上率がある DataFrame からデータを取得し、それを pd.cut を使用してビンに分割します。
+import pandas as pd
+
+# サンプルデータを作成
+data = {'cum_sales_rate': [0.2, 0.5, 0.7, 0.8, 0.85, 0.9, 0.95, 1.0]}
+data_sorted = pd.DataFrame(data)
+
+# pd.cutを使用してデータをビンに分割し、ラベルを付ける
+data_sorted['Category'] = pd.cut(data_sorted['cum_sales_rate'], bins=[0, 0.7, 0.9, 1.0], labels=['A', 'B', 'C'])
+
+# 結果を表示
+display(data_sorted)
+# この例では、cum_sales_rate 列の累積売上率に基づいて、ビン [0, 0.7), [0.7, 0.9), [0.9, 1.0] に分割しています。
+# 各ビンにはそれぞれ 'A', 'B', 'C' というラベルが付けられます。この結果として、新しい 'Category' 列が DataFrame に追加され、各データポイントがどのビンに分類されたかが示されます。
+
+
+
 import pandas as pd
 import numpy as np
 
@@ -109,13 +151,10 @@ df['sales_group'] = pd.cut(df['sales'],
 # salesが16001以上の場合、sales_groupを"16001-18000"に設定する
 df.loc[df['sales'] >= 16001, 'sales_group'] = '16001-18000'
 
-
-
 # priceを区間に分けて、新しいカラムprice_groupを作成する
 df['unit_price'] = pd.cut(df['price'], 
                             bins=range(1, 8001, 500), 
                             labels=['{}-{}'.format(i, i+499) for i in range(1, 7501, 500)])
-
 # 下限の上書き
 df.loc[df['price'] <= 2000, 'unit_price'] = '1501-2000'
 
@@ -139,9 +178,6 @@ no5 = no5.set_index(['producttype', 'unit_price'])
 df['daysofsupply'] = pd.cut(df['use_days'], 
                             bins=range(1, 241, 30), 
                             labels=['{}-{}'.format(i, i+29) for i in range(1, 211, 30)])
-
-
-
 # 150 ずつ
 # 上限 2100-2250　→　1 ~ 2251　→　プラス 150 → 1 ~ 2401
 df['coupon_discount_group'] = pd.cut(df['coupon_discount'], 
