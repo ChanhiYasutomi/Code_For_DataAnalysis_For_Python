@@ -64,3 +64,26 @@ cross_tab = pd.crosstab(df['Gender'], df['Category'])
 
 # このテーブルから、性別と購買カテゴリの組み合わせごとのユーザー数がわかります。
 # たとえば、Female（女性）で Clothing（衣類）を購買したユーザーは1人、Male（男性）で Electronics（電子製品）を購買したユーザーは2人です。pd.crosstabを使用することで、カテゴリカルデータの関係を簡単に可視化および要約できます。
+
+
+
+# pd.crosstabを使用してマルチインデックスを作成するには、indexパラメータにリストを渡すことで複数のカラムを指定できます。以下に具体的な例を示します。
+import pandas as pd
+import numpy as np
+
+# サンプルデータの作成
+data = {
+    'R_score': ['A', 'B', 'A', 'B', 'A', 'B'],
+    'F_score': ['X', 'Y', 'X', 'Y', 'X', 'Y'],
+    'M_score': ['High', 'Low', 'Medium', 'High', 'Low', 'Medium'],
+    'Value': [10, 15, 20, 25, 30, 35]
+}
+
+df = pd.DataFrame(data)
+
+# pd.crosstabを使用してマルチインデックスを作成
+result = pd.crosstab(index=[df['R_score'], df['F_score']], columns=df['M_score'], values=df['Value'], aggfunc=np.sum)
+
+display(result)
+
+# この例では、R_scoreが1つ目のインデックス、F_scoreが2つ目のインデックスとして使用され、M_scoreが列として使用されています。各セルには対応する値の合計が入ります。
