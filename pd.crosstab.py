@@ -84,7 +84,8 @@ df = pd.DataFrame(data)
 # pd.crosstabを使用してマルチインデックスを作成
 result = pd.crosstab(index=[df['R_score'], df['F_score']], columns=df['M_score'], values=df['Value'], aggfunc=np.sum)
 
-# pd.crosstab([df['R_score'], df['F_score']], df['M_score'])
+# pd.crosstab([df['R_score'], df['F_score']], df['M_score']) # multi_index
+# pd.crosstab([df['R_score'], df['F_score']], df['M_score']) # multi_columns
 #    └ pd.crosstabを使用すると、デフォルトで各セルにカウントが入ります。
 
 # R_scoreとF_scoreがインデックスとして使用され、M_scoreが列として使用されています。
