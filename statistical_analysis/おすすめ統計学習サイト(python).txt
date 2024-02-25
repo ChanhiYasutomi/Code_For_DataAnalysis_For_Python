@@ -1,2 +1,1 @@
-おすすめ統計学習サイト(python)
 http://aoki2.si.gunma-u.ac.jp/Python/index.html
