@@ -1,0 +1,8 @@
+ipywidgets can be needed
+
+# !pip install ydata-profiling
+
+# EDA
+# pip install ydata-profiling
+# pip install ipywidgets
+# from ydata_profiling import ProfileReport
